@@ -30,78 +30,11 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip
           pip install -e .
-      - name: Write config
-        run: |
-          cat > config.arc.yaml << 'YAML'
-          project:
-            name: "ai-insurance-distribution-moat"
-            mode: "docs-first"
-          research:
-            topic: >
-              AI voice agents as asymmetric production multipliers in captive
-              insurance distribution. Can a single operator with a small team
-              achieve the bound-policy output of 100-500 traditional agents
-              through closed-loop AI voice agent script optimization, and does
-              learning convergence velocity constitute a defensible moat?
-              Context: captive AmFam agency Fridley MN, 10 states, live Retell AI
-              plus ElevenLabs voice agents, daily transcript analysis loop,
-              200 connected calls convergence threshold, cost per bound policy
-              optimization metric, commercial auto repair SIC 7538 niche,
-              team of 3-5 licensed producers.
-              Evaluate: H1 AI substitution threshold vs human agents. H2 learning
-              velocity as moat over model architecture. H3 scale without headcount
-              via contact volume. H4 bound policy dataset as entry barrier.
-              H5 captive carrier subsidy advantage. H6 realistic output ceiling
-              for small operator.
-            domains:
-              - "conversational-ai"
-              - "reinforcement-learning"
-              - "insurance-economics"
-              - "human-ai-teaming"
-              - "sales-automation"
-              - "voice-ai"
-              - "online-learning"
-              - "platform-economics"
-            daily_paper_count: 12
-            quality_threshold: 3.5
-          runtime:
-            timezone: "America/Chicago"
-            max_parallel_tasks: 3
-            retry_limit: 3
-          llm:
-            provider: "openai-compatible"
-            base_url: "https://api.anthropic.com/v1"
-            api_key_env: "ANTHROPIC_API_KEY"
-            primary_model: "claude-sonnet-4-20250514"
-            fallback_models:
-              - "claude-haiku-4-5-20251001"
-          experiment:
-            mode: "sandbox"
-            time_budget_sec: 600
-            max_iterations: 10
-            metric_key: "convergence_calls"
-            metric_direction: "minimize"
-            sandbox:
-              python_path: ".venv/bin/python"
-              gpu_required: false
-              allowed_imports: [math, random, json, numpy, pandas, sklearn]
-              max_memory_mb: 4096
-          export:
-            target_conference: "neurips_2025"
-            authors: "Weston Nelson, Nelson and Associates Inc."
-            bib_file: "references"
-          security:
-            hitl_required_stages: [5, 9, 20]
-            allow_publish_without_approval: false
-          openclaw_bridge:
-            use_web_fetch: true
-            use_sessions_spawn: true
-            use_memory: true
-          YAML
       - name: Run AutoResearchClaw
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
+          cp config.arc.yaml arc/config.arc.yaml
           source .venv/bin/activate
           researchclaw run --config config.arc.yaml --auto-approve
       - name: Zip output
