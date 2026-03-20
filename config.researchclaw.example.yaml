@@ -23,8 +23,11 @@ notifications:
   on_gate_required: true
 
 knowledge_base:
-  backend: "markdown"
-  root: "docs/kb"
+            backend: "markdown"
+            root: "docs/kb"
+          notifications:
+            channel: "console"
+            target: ""
 
 openclaw_bridge:
   use_cron: false
