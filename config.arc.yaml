@@ -1,0 +1,41 @@
+project:
+  name: ai-insurance-distribution-moat
+  mode: docs-first
+research:
+  topic: "AI voice agents as production multipliers in captive insurance. Can a small operator achieve 100-500 agent output via closed-loop voice AI script optimization? AmFam Fridley MN, Retell AI, ElevenLabs, 200-call convergence threshold, cost per bound policy metric, SIC 7538 commercial auto repair."
+  domains: [conversational-ai, reinforcement-learning, insurance-economics, voice-ai, sales-automation, platform-economics]
+  daily_paper_count: 12
+  quality_threshold: 3.5
+runtime:
+  timezone: America/Chicago
+  max_parallel_tasks: 3
+  retry_limit: 3
+llm:
+  provider: openai-compatible
+  base_url: https://api.anthropic.com/v1
+  api_key_env: ANTHROPIC_API_KEY
+  primary_model: claude-sonnet-4-20250514
+  fallback_models: [claude-haiku-4-5-20251001]
+experiment:
+  mode: sandbox
+  time_budget_sec: 600
+  max_iterations: 10
+  metric_key: convergence_calls
+  metric_direction: minimize
+  sandbox:
+    python_path: .venv/bin/python
+    gpu_required: false
+    max_memory_mb: 4096
+export:
+  target_conference: neurips_2025
+  authors: Weston Nelson
+  bib_file: references
+notifications:
+  channel: console
+  target: ""
+knowledge_base:
+  backend: markdown
+  root: docs/kb
+security:
+  hitl_required_stages: [5, 9, 20]
+  allow_publish_without_approval: false
