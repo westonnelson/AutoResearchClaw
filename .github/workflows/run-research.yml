@@ -17,9 +17,6 @@ jobs:
     steps:
       - name: Checkout AutoResearchClaw
         uses: actions/checkout@v4
-        with:
-          repository: aiming-lab/AutoResearchClaw
-          ref: main
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
@@ -34,6 +31,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
+          mkdir -p arc
           cp config.arc.yaml arc/config.arc.yaml
           source .venv/bin/activate
           researchclaw run --config config.arc.yaml --auto-approve
